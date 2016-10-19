@@ -19,7 +19,6 @@ get '/' do
 	puts my_number_array.inspect
 	my_number_array = my_number_array.join("&").encrypt(:symmetric, :algorithm => 'des-ecb', :password => pwd)
 	puts "Aquiiii"
-	puts my_number_array
 	response.set_cookie(:number, value: my_number_array)
 	erb :index
 end
