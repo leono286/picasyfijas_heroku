@@ -17,9 +17,11 @@ get '/' do
 	  list_of_number.delete(digit)
 	end
 	puts my_number_array.inspect
+	response.set_cookie(:number_revealed, value: my_number_array)
 	my_number_array = my_number_array.join("&").encrypt(:symmetric, :algorithm => 'des-ecb', :password => pwd)
 	puts "Aquiiii"
 	response.set_cookie(:number, value: my_number_array)
+	response.set_cookie(:number_revealed, value: my_number_array)
 	erb :index
 end
 
