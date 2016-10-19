@@ -18,6 +18,7 @@ get '/' do
 	end
 	puts my_number_array.inspect
 	my_number_array = my_number_array.join("&").encrypt(:symmetric, :algorithm => 'des-ecb', :password => pwd)
+	puts my_number_array
 	response.set_cookie(:number, value: my_number_array)
 	erb :index
 end
@@ -29,13 +30,9 @@ post '/' do
 	# @res = 
 	@ntries = params[:ntries].to_i + 1
 	fijas_count = 0
-	picas_count = 0
-	
-	
-	
+	picas_count = 0	
 	my_number_array = cookies[:number].decrypt(:symmetric, :algorithm => 'des-ecb', :password => pwd).split('&').map(&:to_i)
-	user_num = params[:number].split("").map(&:to_i)
-	
+	user_num = params[:number].split("").map(&:to_i)	
 	if user_num.length > 0
 		if user_num.length != 4
 			@res = params[:number] + "-" + "88," + @res
